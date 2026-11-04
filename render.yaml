@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: rcsb-band
+    runtime: static
+    buildCommand: npm ci && npm run build
+    staticPublishPath: _site
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+    domains:
+      - rcsb.band

@@ -1,0 +1,20 @@
+# Who's in the band, shown in this order.
+#
+#   name:   Required.
+#   plays:  Optional. What they do in the band.
+#   photo:  Optional. Upload the image to content/photos/ and put the file name here.
+
+- name: Varo Aquique
+  plays: Lead guitar
+
+- name: Huey-Ling Chen
+  plays: Keyboard, guitar, cello
+
+- name: Nick Gryskiewicz
+  plays: Drums
+
+- name: Dave Rolsky
+  plays: Bass
+
+- name: Edan Schwartz
+  plays: Vocals, guitar

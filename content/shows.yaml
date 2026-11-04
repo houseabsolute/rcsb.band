@@ -1,0 +1,29 @@
+# Our shows. Add a new one by copying a block (from the "- date" line down to the blank line) and
+# changing the details. The order doesn't matter, the site sorts them by date.
+#
+# Old shows move to "Past shows" on their own, so you never need to delete them.
+#
+#   date:    Required. Year-month-day, like 2026-11-15
+#   venue:   Required. Where we're playing.
+#   city:    Optional. Like "Minneapolis, MN"
+#   time:    Optional. Any text, like "Doors 7pm, show 8pm"
+#   with:    Optional. Other bands on the bill.
+#   tickets: Optional. A link to buy tickets.
+#   notes:   Optional. Anything else, like "All ages" or "Free!"
+
+- date: 2026-12-05
+  venue: Example Venue
+  city: Somewhere, USA
+  time: Doors 7pm, show 8pm
+  with: Another Band, A Third Band
+  tickets: https://example.com/tickets
+  notes: All ages
+
+- date: 2027-01-17
+  venue: The Example Lounge
+  city: Somewhere Else, USA
+  time: 9pm
+
+- date: 2026-09-20
+  venue: An Old Show
+  city: Somewhere, USA

@@ -1,0 +1,26 @@
+# Basic info about the band. This shows up at the top of the page, in the contact section, and
+# when someone shares a link to the site.
+#
+# Tip: if a line of text has a colon (:) or starts with a quote, put the whole thing in "quotes".
+
+name: Rainbow County School Board
+
+# A short line under the band name.
+tagline: "This meeting is now called to order."
+
+# One or two sentences that search engines and link previews show.
+description: Rainbow County School Board is a band. Shows, music, and how to reach us.
+
+# Optional. A photo shown at the top of the page. Upload it to content/photos/ and put the file name
+# here, like: photo: band.jpg   Leave it blank for no photo.
+photo:
+
+# Where booking and fan email should go.
+email: hello@rcsb.band
+
+# Links shown in the contact section. Add, remove, or reorder as you like.
+links:
+  - name: Instagram
+    url: https://www.instagram.com/
+  - name: Bandcamp
+    url: https://bandcamp.com/

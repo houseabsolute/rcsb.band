@@ -1,0 +1,17 @@
+{
+  "name": "rcsb-band",
+  "private": true,
+  "type": "module",
+  "description": "Website for Rainbow County School Board",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve"
+  },
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.8",
+    "js-yaml": "^5.5.0"
+  }
+}

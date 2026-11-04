@@ -1,0 +1,130 @@
+---
+layout: base.njk
+permalink: /index.html
+---
+{%- set upcomingShows = shows | upcoming -%}
+{%- set pastShows = shows | past -%}
+
+{%- macro showItem(show) -%}
+<li class="show" data-date="{{ show.date }}">
+  <time class="show-date" datetime="{{ show.date }}">{{ show.date | prettyDate }}</time>
+  <div class="show-info">
+    <strong class="show-venue">{{ show.venue }}</strong>
+    {%- if show.city %}<span class="show-city">{{ show.city }}</span>{% endif %}
+    {%- if show.time %}<span class="show-meta">{{ show.time }}</span>{% endif %}
+    {%- if show.with %}<span class="show-meta">with {{ show.with }}</span>{% endif %}
+    {%- if show.notes %}<span class="show-meta">{{ show.notes }}</span>{% endif %}
+  </div>
+  {%- if show.tickets %}<a class="button show-tickets" href="{{ show.tickets }}">Tickets</a>{% endif %}
+</li>
+{%- endmacro -%}
+
+<header class="top">
+  <nav class="nav">
+    <a class="nav-home" href="#">RCSB</a>
+    <ul>
+      <li><a href="#shows">Shows</a></li>
+      {% if music.length %}<li><a href="#music">Music</a></li>{% endif %}
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="hero">
+    <p class="kicker">Regular meeting &middot; Now in session</p>
+    <h1>{{ band.name }}</h1>
+    {% if band.tagline %}<p class="tagline">{{ band.tagline }}</p>{% endif %}
+  </div>
+  {% if band.photo %}<img class="hero-photo" src="{{ band.photo | photo }}" alt="{{ band.name }}">{% endif %}
+</header>
+
+<main>
+  <section id="shows" class="item">
+    <h2><span class="item-num">Item 1</span> Upcoming shows</h2>
+    <ul class="shows" id="upcoming-shows">
+      {%- for show in upcomingShows %}{{ showItem(show) }}{% endfor -%}
+    </ul>
+    <p class="empty" id="no-shows" {% if upcomingShows.length %}hidden{% endif %}>
+      Nothing on the calendar right now. Check back soon.
+    </p>
+    <details class="past" id="past-shows-box" {% if not pastShows.length %}hidden{% endif %}>
+      <summary>Past shows</summary>
+      <ul class="shows" id="past-shows">
+        {%- for show in pastShows %}{{ showItem(show) }}{% endfor -%}
+      </ul>
+    </details>
+  </section>
+
+  {% if music.length %}
+  <section id="music" class="item">
+    <h2><span class="item-num">Item 2</span> Music</h2>
+    <div class="releases">
+      {%- for release in music %}
+      <article class="release">
+        {% if release.cover %}<img class="release-cover" src="{{ release.cover | photo }}" alt="Cover of {{ release.title }}">{% endif %}
+        <h3>{{ release.title }}{% if release.year %} <span class="release-year">{{ release.year }}</span>{% endif %}</h3>
+        {% if release.links and release.links.length %}
+        <ul class="pills">
+          {%- for link in release.links %}<li><a href="{{ link.url }}">{{ link.name }}</a></li>{% endfor -%}
+        </ul>
+        {% endif %}
+        {% if release.embed %}<div class="embed">{{ release.embed | safe }}</div>{% endif %}
+      </article>
+      {%- endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <section id="about" class="item">
+    <h2><span class="item-num">Item {{ 3 if music.length else 2 }}</span> About</h2>
+    <div class="prose">
+      {% renderFile "./content/about.md" %}
+    </div>
+    {% if members.length %}
+    <h3 class="board-title">The board</h3>
+    <ul class="members">
+      {%- for member in members %}
+      <li class="member">
+        {% if member.photo %}<img class="member-photo" src="{{ member.photo | photo }}" alt="{{ member.name }}">{% endif %}
+        <strong>{{ member.name }}</strong>
+        {% if member.plays %}<span>{{ member.plays }}</span>{% endif %}
+      </li>
+      {%- endfor %}
+    </ul>
+    {% endif %}
+  </section>
+
+  <section id="contact" class="item">
+    <h2><span class="item-num">Item {{ 4 if music.length else 3 }}</span> Contact</h2>
+    {% if band.email %}
+    <p class="contact-email"><a href="mailto:{{ band.email }}">{{ band.email }}</a></p>
+    {% endif %}
+    {% if band.links and band.links.length %}
+    <ul class="pills">
+      {%- for link in band.links %}<li><a href="{{ link.url }}">{{ link.name }}</a></li>{% endfor -%}
+    </ul>
+    {% endif %}
+  </section>
+</main>
+
+<footer class="footer">
+  <p>&copy; {{ "" | year }} {{ band.name }}. Meeting adjourned.</p>
+</footer>
+
+<script>
+  // The site splits shows into upcoming and past when it is built, but it might not be rebuilt for
+  // a while. This moves any show whose date is now behind us, using the visitor's own date.
+  (() => {
+    const now = new Date();
+    const pad = (n) => String(n).padStart(2, "0");
+    const today = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+    const upcoming = document.getElementById("upcoming-shows");
+    const past = document.getElementById("past-shows");
+    for (const show of [...upcoming.children]) {
+      if (show.dataset.date < today) {
+        past.prepend(show);
+      }
+    }
+    document.getElementById("no-shows").hidden = upcoming.children.length > 0;
+    document.getElementById("past-shows-box").hidden = past.children.length === 0;
+  })();
+</script>
