@@ -11,19 +11,12 @@
 #   tickets: Optional. A link to buy tickets.
 #   notes:   Optional. Anything else, like "All ages" or "Free!"
 
-- date: 2026-12-05
-  venue: Example Venue
-  city: Somewhere, USA
-  time: Doors 7pm, show 8pm
-  with: Another Band, A Third Band
-  tickets: https://example.com/tickets
-  notes: All ages
+- date: 2026-09-16
+  venue: Saint Anthony Park Porchfest
+  notes: Our first gig
 
-- date: 2027-01-17
-  venue: The Example Lounge
-  city: Somewhere Else, USA
-  time: 9pm
-
-- date: 2026-09-20
-  venue: An Old Show
-  city: Somewhere, USA
+- date: 2026-10-30
+  venue: Willow River Saloon
+  city: Hudson, WI
+  with: The Nine Teas
+  notes: Our first indoor gig
